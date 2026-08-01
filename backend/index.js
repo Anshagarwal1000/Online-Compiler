@@ -33,10 +33,10 @@ app.post("/run", async (req, res) => {
         res.status(201).json({ success: true, jobId });
 
         // STEP 3: Generate files and add job to the Redis Queue
-        const filepath = generateFile(language, code);
+        const filepath = generateFile(language, code, jobId);
         let inputFilePath;
         if (input) {
-            inputFilePath = generateInputFile(input);
+            inputFilePath = generateInputFile(input, jobId);
         }
         
         job.filePath = filepath;

@@ -25,6 +25,10 @@ const generateFile = (format, content, jobId) => {
   let filename;
   let fileContent = content;
 
+  if (!jobId) {
+    throw new Error("Missing jobId for file generation");
+  }
+
   if (format === "java") {
     const classNameRegex = /public\s+class\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/;
     const match = content.match(classNameRegex);
@@ -55,6 +59,10 @@ const generateFile = (format, content, jobId) => {
 };
 
 const generateInputFile = (input, jobId) => {
+  if (!jobId) {
+    throw new Error("Missing jobId for input file generation");
+  }
+
   const filename = `${jobId}.txt`;
   const filePath = path.join(dirInputs, filename);
   fs.writeFileSync(filePath, input);
